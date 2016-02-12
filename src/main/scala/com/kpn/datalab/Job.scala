@@ -33,7 +33,7 @@ object Job {
 
     val stream = env.addSource(kafkaConsumer)
 
-    val sink = new RollingSink[String]("/tmp/dump")
+    val sink = new RollingSink[String]("hdfs:///user/sanne")
       .setBucketer(new DateTimeBucketer("ss"))
       .setBatchSize(batchSize)
       .setPartPrefix("part")

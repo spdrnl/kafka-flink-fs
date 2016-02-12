@@ -14,3 +14,8 @@ This setup was intended to run with:
 * Apache Kafka 0.9.0.0
 * Apache Flink 0.10.1
 
+TODO
+-------------
+
+* Check Scala conflict version
+
