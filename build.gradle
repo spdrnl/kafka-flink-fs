@@ -1,0 +1,45 @@
+plugins {
+    id 'maven'
+    id 'scala'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+group = 'com.kpn'
+version = '1.0-SNAPSHOT'
+description = """flink-stream"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url "https://repository.apache.org/content/repositories/snapshots/" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+    compile group: 'org.apache.flink', name: 'flink-scala', version: '0.10.1'
+    compile group: 'org.apache.flink', name: 'flink-streaming-scala', version: '0.10.1'
+    compile group: 'org.apache.flink', name: 'flink-clients', version: '0.10.1'
+    compile group: 'org.apache.flink', name: 'flink-connector-kafka', version: '0.10.1'
+    compile group: 'org.apache.flink', name: 'flink-connector-filesystem', version: '0.10.1'
+}
+
+shadowJar {
+    manifest {
+        attributes("Main-Class": "com.kpn.datalab.Job")
+    }
+    dependencies {
+        include(dependency('org.apache.flink:flink-clients:0.10.1'))
+        include(dependency('org.apache.flink:flink-connector-kafka:0.10.1'))
+        include(dependency('org.apache.kafka:kafka_2.10:0.8.2.0'))
+        include(dependency('flink-connector-filesystem:flink-connector-filesystem:0.10.1'))
+        include(dependency('com.yammer.metrics:metrics-core:2.2.0'))
+        include(dependency('com.101tec:zkclient:0.7'))
+    }
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+    main = 'com.kpn.datalab.Job'
+    classpath sourceSets.main.runtimeClasspath
+    classpath configurations.runtime
+}
