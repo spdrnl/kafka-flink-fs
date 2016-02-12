@@ -31,10 +31,11 @@ shadowJar {
     dependencies {
         include(dependency('org.apache.flink:flink-clients:0.10.1'))
         include(dependency('org.apache.flink:flink-connector-kafka:0.10.1'))
+        include(dependency('org.apache.flink:flink-connector-filesystem:0.10.1'))
+        include(dependency('org.apache.kafka:kafka-clients:0.8.2.0'))
         include(dependency('org.apache.kafka:kafka_2.10:0.8.2.0'))
-        include(dependency('flink-connector-filesystem:flink-connector-filesystem:0.10.1'))
         include(dependency('com.yammer.metrics:metrics-core:2.2.0'))
-        include(dependency('com.101tec:zkclient:0.7'))
+        include(dependency('com.101tec:zkclient:0.3'))
     }
 }
 
