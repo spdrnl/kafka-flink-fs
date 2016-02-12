@@ -32,6 +32,7 @@
 ### Gradle ###
 .gradle
 build/
+gradle/
 
 # Mongo Explorer plugin:
 # .idea/mongoSettings.xml
